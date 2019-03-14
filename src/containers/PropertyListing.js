@@ -1,26 +1,43 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
-import { fetchProperties, fetchPropertyById } from '../store/actions';
+import { fetchProperties, fetchPropertyById, setProperty } from '../store/actions';
+import Table from '../components/Table';
+import Modal from '../components/Modal'; 
+import Detail from '../components/Detail'; 
 
 export class PropertyListing extends Component {
+
+    state = {
+        isModalOpened: false
+    }
 
     componentDidMount() {
         this.props.fetchProperties();
     }
 
+    closeDetail = () => {
+        this.setState({ isModalOpened: false });
+        this.props.setProperty(null);
+    };
+    
     openDetail = propID => {
         this.props.fetchPropertyById(propID)
+        this.setState({ isModalOpened: true })
     }
 
     render() {
         return (
             <div>
                 <h1>Property Listing</h1>
-                <ul>
-                    { this.props.properties.map(item => (
-                        <li key={ item.propID } onClick={ () => this.openDetail(item.propID) }>{ item.propID }</li>
-                    ))}
-                </ul>
+                <Table 
+                    data={ this.props.properties} 
+                    onRowClicked={ this.openDetail }
+                />
+                { this.state.isModalOpened && (
+                    <Modal onClose={ this.closeDetail }>
+                        <Detail data={ this.props.currentProperty }/>
+                    </Modal>
+                )}
             </div>
         )
     }
@@ -33,7 +50,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
     fetchProperties,
-    fetchPropertyById
+    fetchPropertyById,
+    setProperty
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(PropertyListing)

@@ -1,0 +1,26 @@
+.detail {
+    padding: 24px;
+
+    .formControl {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        padding-bottom: 16px;
+
+        label {
+            margin-right: 16px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+    
+        input {
+            font-size: 20px;
+            padding: 12px;
+            width: 50%;
+        }
+
+    }
+    
+   
+}

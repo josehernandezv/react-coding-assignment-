@@ -1,4 +1,5 @@
 export {
     fetchProperties,
-    fetchPropertyById
+    fetchPropertyById,
+    setProperty
 } from './properties';
