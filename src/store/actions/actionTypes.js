@@ -1,0 +1,2 @@
+export const SET_PROPERTIES_LIST = 'SET_PROPERTIES_LIST';
+export const SET_PROPERTY = 'SET_PROPERTY';
